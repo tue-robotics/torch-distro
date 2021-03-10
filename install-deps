@@ -178,31 +178,25 @@ elif [[ "$(uname)" == 'Linux' ]]; then
         if [[ $ubuntu_major_version -lt '16' ]]; then
             echo '==> Ubuntu version not supported.'
             exit 1
-        else
-            sudo apt-get install -y software-properties-common \
-                libgraphicsmagick1-dev libfftw3-dev sox libsox-dev \
-                libsox-fmt-all
+        fi
+	if [[ $ubuntu_major_version -lt '20' ]]; then
+            sudo apt-get install -y ipython
+	else
+	    sudo apt-get install -y ipython3
         fi
 
-        if sudo apt-get update ; then
-            echo "Updated successfully."
-        else
-            echo "Some portion of the update is failed"
-        fi
         sudo apt-get install -y build-essential gcc g++ curl \
-            cmake libreadline-dev git-core libqt4-dev libjpeg-dev \
+            cmake libreadline-dev git-core libqt5-dev libjpeg-dev \
             libpng-dev ncurses-dev imagemagick libzmq3-dev gfortran \
-            unzip gnuplot gnuplot-x11 ipython
+            unzip gnuplot gnuplot-x11 software-properties-common \
+	    libgraphicsmagick1-dev libfftw3-dev sox libsox-dev \
+            libsox-fmt-all
 
         gcc_major_version=$(gcc --version | grep ^gcc | awk '{print $4}' | \
                             cut -c 1)
         if [[ $gcc_major_version == '5' ]]; then
             echo '==> Found GCC 5, installing GCC 4.9.'
             sudo apt-get install -y gcc-4.9 libgfortran-4.9-dev g++-4.9
-        fi
-
-        if [[ $ubuntu_major_version -lt '15' ]]; then
-            sudo apt-get install libqt4-core libqt4-gui
         fi
 
         install_openblas || true
