@@ -186,7 +186,7 @@ elif [[ "$(uname)" == 'Linux' ]]; then
         fi
 
         sudo apt-get install -y build-essential gcc g++ curl \
-            cmake libreadline-dev git-core libqt5-dev libjpeg-dev \
+            cmake libreadline-dev git-core qtbase5-dev libjpeg-dev \
             libpng-dev ncurses-dev imagemagick libzmq3-dev gfortran \
             unzip gnuplot gnuplot-x11 software-properties-common \
 	    libgraphicsmagick1-dev libfftw3-dev sox libsox-dev \
